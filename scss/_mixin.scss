@@ -1,0 +1,601 @@
+@import './variable';
+
+@mixin alignItemCenter {
+  display: flex;
+  align-items: center;
+}
+
+@mixin jutifyContentCenter {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin jutifySpacebetween {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin width($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin fixed($top, $left, $bottom, $right, $zindex) {
+  position: fixed;
+  top: $top;
+  left: $left;
+  bottom: $bottom;
+  right: $right;
+  z-index: $zindex;
+}
+
+@mixin positionAbsolute($top, $left, $bottom, $right, $zindex) {
+  position: absolute;
+  top: $top;
+  left: $left;
+  bottom: $bottom;
+  right: $right;
+  z-index: $zindex;
+}
+
+@mixin maxWidth($maxwidth) {
+  @media (max-width: $maxwidth) {
+    @content;
+  }
+}
+
+@mixin minWidth($minwidth) {
+  @media (min-width: $minwidth) {
+    @content;
+  }
+}
+
+@mixin widthMinMax($minwidth, $maxwidth) {
+  @media (min-width: $minwidth) and (max-width: $maxwidth) {
+    @content;
+  }
+}
+
+@mixin imgResize {
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@mixin fontSizeTitle($fontsize) {
+  font-size: $fontsize;
+  @include maxWidth(992px) {
+    font-size: 20px;
+  }
+
+  @include maxWidth(768px) {
+    font-size: 18px;
+  }
+}
+
+@mixin fontSizeTitleH3($fontsize) {
+  font-size: $fontsize;
+  @include maxWidth(992px) {
+    @if ($fontsize >= 18px) {
+      font-size: 18px;
+    } @else {
+      font-size: $fontsize;
+    }
+  }
+
+  @include maxWidth(768px) {
+    @if ($fontsize >= 16px) {
+      font-size: 16px;
+    } @else {
+      font-size: $fontsize;
+    }
+  }
+}
+
+@mixin marginBottom($marginbottom) {
+  margin-bottom: $marginbottom;
+  @include maxWidth(992px) {
+    @if ($marginbottom >= 20px) {
+      margin-bottom: 20px;
+    }
+  }
+
+  @include maxWidth(768px) {
+    @if ($marginbottom >= 15px) {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+@mixin marginTop($margintop) {
+  margin-top: $margintop;
+  @include maxWidth(992px) {
+    @if ($margintop >= 20px) {
+      margin-top: 20px;
+    }
+  }
+
+  @include maxWidth(768px) {
+    margin-top: 15px;
+  }
+}
+
+@mixin padding($top, $left, $bottom, $right) {
+  padding-top: $top;
+  padding-left: $left;
+  padding-bottom: $bottom;
+  padding-right: $right;
+
+  @include maxWidth(992px) {
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
+
+  @include maxWidth(992px) {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+
+@mixin margin($top, $left, $bottom, $right) {
+  margin-top: $top;
+  margin-left: $left;
+  margin-bottom: $bottom;
+  margin-right: $right;
+  @include maxWidth(992px) {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+
+  @include maxWidth(992px) {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}
+
+@mixin font($fontfamily, $fontsize, $colortext) {
+  font-family: $fontfamily;
+  font-size: $fontsize;
+  color: $colortext;
+}
+
+@mixin fontSizeP($fontsize) {
+  font-size: $fontsize;
+  line-height: 1.5;
+
+  @include maxWidth(992px) {
+    @if ($fontsize > 14px) {
+      font-size: 14px;
+    }
+  }
+  @include maxWidth(768px) {
+    font-size: 14px;
+  }
+}
+
+@mixin positionAbsoluteCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin title($fontsize, $marginbottom, $boolean) {
+  @include marginBottom($marginbottom);
+  @if ($boolean == h3) {
+    @include font(mulishBold, $fontsize, $--color-text);
+    @include fontSizeTitleH3($fontsize);
+  }
+
+  @if ($boolean == h2) {
+    text-transform: uppercase;
+    text-align: center;
+    @include font(mulishBold, $fontsize, $--color-main);
+    @include fontSizeTitle($fontsize);
+  }
+
+  @if ($boolean == h1) {
+    @include font(mulishBold, $fontsize, $--color-white);
+    @include fontSizeTitle($fontsize);
+    text-transform: uppercase;
+    text-align: center;
+  }
+}
+
+@mixin textLine($linetext, $minheight) {
+  overflow: hidden;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $linetext;
+  min-height: $minheight;
+}
+
+@mixin cssFooterItemResponsive {
+  .footer-item {
+    @include widthMinMax(992px, 1200px) {
+      margin: 0 15px;
+    }
+  }
+  @include maxWidth(992px) {
+    .block {
+      flex-wrap: wrap;
+      gap: 15px;
+      .footer-item {
+        &:nth-child(1),
+        &:nth-child(2) {
+          width: calc((100% - 15px) / 2);
+        }
+      }
+
+      .footer-item:last-child {
+        margin: 0 auto;
+      }
+    }
+  }
+  @include maxWidth(728px) {
+    .block {
+      flex-direction: column;
+      gap: 0;
+      .footer-item {
+        width: 100%;
+        justify-content: flex-start;
+
+        &:nth-child(1),
+        &:nth-child(2) {
+          width: 100%;
+        }
+
+        .select {
+          margin-bottom: 15px;
+        }
+      }
+    }
+  }
+}
+
+@mixin cssInput($color, $colorborder: $color) {
+  input {
+    @include width(100%);
+    outline: none;
+    background-color: transparent;
+    @include font(roboto, 14px, $color);
+    border: 1px solid $colorborder;
+    padding-left: 23px;
+    &::placeholder {
+      @include font(roboto, 14px, $color);
+    }
+
+    @include maxWidth(768px) {
+      padding-left: 15px;
+    }
+  }
+
+  @include maxWidth(768px) {
+    height: 36px;
+  }
+}
+
+@mixin cssTextArea($width, $height, $colorborder, $borderradius, $colortext) {
+  textarea {
+    width: $width;
+    height: $height;
+    outline: none;
+    resize: none;
+    border: 1px solid $colorborder;
+    border-radius: $borderradius;
+    padding-top: 12px;
+    padding-left: 16px;
+    @include font(mulish, 14px, $colortext);
+
+    &::placeholder {
+      @include font(mulish, 14px, $colortext);
+    }
+
+    @include maxWidth(768px) {
+      height: $--height-textarea-mb;
+    }
+  }
+}
+
+@mixin cssBtn($color, $bgc) {
+  border: 1px solid $color;
+  outline: none;
+  background-color: $bgc;
+  @include font(mulishSemiBold, 14px, $color);
+  transition: background 0.5s linear;
+  cursor: pointer;
+
+  i {
+    margin-right: 8px;
+    font-size: 15px;
+    @include maxWidth(768px) {
+      margin-right: 4px;
+      font-size: 14px;
+    }
+  }
+
+  &:hover {
+    background-color: $color;
+    color: $bgc;
+    border: 1px solid $bgc;
+  }
+  @include maxWidth(768px) {
+    i {
+      margin-right: 0;
+    }
+    span {
+      display: none;
+    }
+  }
+}
+
+@mixin cssBtnDetails {
+  @include flexCenter;
+  @include cssBtn($--color-white, $--color-main);
+  @include width(130px, $--height-btn);
+  text-transform: capitalize;
+  margin: 0 auto;
+  @include maxWidth(992px) {
+    @include width(110px, $--height-btn-mb);
+  }
+}
+
+@mixin cssTextSlideUpdateAni {
+  @include maxWidth(1200px) {
+    padding: 0 25px 0 25px;
+  }
+
+  @include maxWidth(992px) {
+    padding: 0 20px 0 20px;
+  }
+
+  @include maxWidth(768px) {
+    padding: 0 15px 0 15px;
+  }
+}
+
+@mixin cssHoverImg {
+  .img {
+    overflow: hidden;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;      
+    }
+    &:hover{
+      img{
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+@mixin hiddenScroll {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@mixin cssListTab {
+  .lists-tab {
+    @include positionAbsolute(unset, 0, 0, 0, 10);
+    @include jutifyContentCenter();
+    justify-content: flex-end;
+    flex-direction: column;
+    height: $--height-lists-tab;
+    background: url('../images/overlay-banner.png') no-repeat;
+    background-size: 100% 100%;
+
+    ul {
+      @include jutifyContentCenter();
+
+      li {
+        color: $--color-white;
+        @include margin(0, 6px, 20px, 6px);
+        a {
+          @include font(mulishSemiBold, 14px, $--color-white);
+          text-transform: uppercase;
+        }
+
+        @include maxWidth(768px) {
+          margin: 0 6px;
+        }
+      }
+    }
+
+    h1.title {
+      @include title(33px, 31px, h1);
+    }
+  }
+
+  @include maxWidth(768px) {
+    .search {
+      .form-search {
+        top: 40%;
+      }
+    }
+  }
+
+  @include maxWidth(568px) {
+    .search {
+      .form-search {
+        top: 30%;
+      }
+    }
+  }
+
+  @include maxWidth(468px) {
+    .search {
+      .form-search {
+        top: 25%;
+      }
+    }
+  }
+}
+
+@mixin cssPage {
+  @include flexCenter();
+  @include padding(0, 0, 45px, 0);
+
+  a,
+  span {
+    @include width(33px);
+    border: 1px solid $--color-border-page;
+    border-radius: $--border-radius-clicle;
+    transition: background 0.5s linear;
+    @include flexCenter();
+    margin: 0 3.5px;
+    color: $--color-text;
+
+    i {
+      font-size: 14px;
+    }
+
+    &.active-page,
+    &:hover {
+      background-color: $--color-page-active;
+      color: $--color-white;
+    }
+
+    &.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    &.hidden {
+      display: none;
+    }
+  }
+}
+
+@mixin cssItemAnimals {
+  .item {
+    @include jutifySpacebetween();
+    background-color: $--bgc-slide-update-animals;
+
+    .text {
+      width: 50%;
+      padding: 0 90px 0 50px;
+      @include cssTextSlideUpdateAni();
+
+      h3.title {
+        @include title(24px, 24px, h3);
+        line-height: 1.2;
+        text-align: left;
+        @include maxWidth(1200px) {
+          margin-bottom: 15px;
+          @include textLine(2, 20px);
+        }
+      }
+
+      .desc {
+        p {
+          @include marginBottom(25px);
+          @include textLine(4, 40px);
+          text-align: justify;
+
+          @include maxWidth(1200px) {
+            margin-bottom: 15px;
+          }
+
+          @include maxWidth(992px) {
+            @include textLine(3, 40px);
+          }
+        }
+      }
+      .see-details {
+        @include cssBtnDetails();
+        margin: 0;
+      }
+    }
+    .img {
+      width: 50%;
+    }
+
+    @include maxWidth(768px) {
+      flex-direction: column-reverse;
+
+      .img,
+      .text {
+        width: 100%;
+      }
+
+      .img {
+        margin-bottom: 15px;
+      }
+
+      .text {
+        padding-bottom: 15px;
+
+        .see-details {
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+}
+
+@mixin cssNewsItem {
+  @include alignItemCenter();
+  gap: 25px;
+  .news-item {
+    width: calc((100% - 75px) / 4);
+
+    .img {
+      @include marginBottom(25px);
+      @include imgResize();
+    }
+
+    .text {
+      .date {
+        @include font(mulish, 14px, $--color-date);
+        @include marginBottom(16px);
+      }
+
+      h3.title {
+        @include title(18px, 18px, h3);
+        @include textLine(2, 30px);
+      }
+
+      p {
+        text-align: justify;
+        @include textLine(3, 30px);
+      }
+    }
+
+    @include cssHoverImg();
+  }
+  @include maxWidth(992px) {
+    gap: 15px;
+    .news-item {
+      width: calc((100% - 45px) / 4);
+    }
+  }
+
+  @include maxWidth(768px) {
+    flex-wrap: wrap;
+    .news-item {
+      width: calc((100% - 15px) / 2);
+    }
+  }
+}
+
+@mixin _max-text($num) {
+  -webkit-line-clamp: $num;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+}
