@@ -102,6 +102,7 @@ $(function () {
   resizeImage('.news-cnt .left .img', 310 / 540);
   resizeImage('.news-cnt .right .img', 105 / 180);
   resizeImage('.kn-slide .knowledge-item .img', 200 / 355);
+  resizeImage('.register-trending .block-2 .item .img', 9 / 16);
 
   $('.btn-search').click(function () {
     $('.input_sr').toggleClass('active');
