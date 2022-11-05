@@ -16,6 +16,30 @@ $(function () {
     dots: 1,
     nav: 0,
   });
+
+  $('.slide-posts').owlCarousel({
+    loop: 1,
+    items: 3,
+    dots: 0,
+    nav: 1,
+    margin: 20,
+    navText: [
+      '<i class="fa fa-angle-left"></i>',
+      '<i class="fa fa-angle-right"></i>',
+    ],
+  });
+  $('.slide-client').owlCarousel({
+    loop: 1,
+    items: 2,
+    dots: 1,
+    nav: 0,
+    margin: 24,
+    navText: [
+      '<i class="fa fa-angle-left"></i>',
+      '<i class="fa fa-angle-right"></i>',
+    ],
+  });
+
   // $('.ser-slide1').owlCarousel({loop: 0, items: 1, dots: 0, nav: 0})
   var slidesPerPage = 5; //globaly define number of elements per page
   var syncedSecondary = true;
@@ -103,6 +127,7 @@ $(function () {
   resizeImage('.news-cnt .right .img', 105 / 180);
   resizeImage('.kn-slide .knowledge-item .img', 200 / 355);
   resizeImage('.register-trending .block-2 .item .img', 9 / 16);
+  resizeImage('  .content-news .container .left .item .img', 9 / 16);
 
   $('.btn-search').click(function () {
     $('.input_sr').toggleClass('active');
