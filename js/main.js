@@ -136,4 +136,10 @@ $(function () {
     $('.ser-slide2').toggleClass('active');
     $(this).toggleClass('active');
   });
+
+  $('.register-trending a.item').click(function (e) {
+    e.preventDefault();
+
+    $(this).next('.sub').slideToggle();
+  });
 });

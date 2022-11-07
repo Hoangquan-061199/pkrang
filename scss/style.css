@@ -668,6 +668,7 @@ header .hd-bot .input_sr button {
 }
 .banner .txt ul {
   display: flex;
+  justify-content: center;
 }
 .banner .txt ul li {
   margin-right: 5px;

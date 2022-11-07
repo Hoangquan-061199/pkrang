@@ -670,6 +670,8 @@ header {
     }
     ul {
       display: flex;
+      justify-content: center;
+
       li {
         margin-right: 5px;
         color: #fff;
